@@ -1,4 +1,4 @@
-## ChequeMate - An accounting sofware for Plooto 
+## ChequeMate - An accounting software for Plooto 
 
 [Live Demo](http://whattodoa.s3-website.ca-central-1.amazonaws.com/)
 
