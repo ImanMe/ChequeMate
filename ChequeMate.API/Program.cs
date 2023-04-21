@@ -1,4 +1,10 @@
+using ChequeMate.Persistence;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<InvoiceContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ChequeMateConnection")));
 
 builder.Services.AddControllers();
 
