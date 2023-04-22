@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChequeMate.API", "ChequeMate.API\ChequeMate.API.csproj", "{A72FF486-3B8E-49A6-AB32-1155A6F55C6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChequeMate.API", "ChequeMate.API\ChequeMate.API.csproj", "{A72FF486-3B8E-49A6-AB32-1155A6F55C6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChequeMate.Persistence", "ChequeMate.Persistence\ChequeMate.Persistence.csproj", "{14C73CC5-1560-4337-A645-3FC68DA0090E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChequeMate.Persistence", "ChequeMate.Persistence\ChequeMate.Persistence.csproj", "{14C73CC5-1560-4337-A645-3FC68DA0090E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChequeMate.Domain", "ChequeMate.Domain\ChequeMate.Domain.csproj", "{381E8DF7-6AB2-4588-8DE0-CC6E70699A37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChequeMate.Domain", "ChequeMate.Domain\ChequeMate.Domain.csproj", "{381E8DF7-6AB2-4588-8DE0-CC6E70699A37}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "ChequeMateClient", "ChequeMateClient\ChequeMateClient.esproj", "{5550D872-86A2-4D4E-B809-DF63C6A85641}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{7F749425-20C3-4AA1-9848-FF0B90D880AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChequeMate.Domain.UnitTest", "ChequeMate.Domain.UnitTest\ChequeMate.Domain.UnitTest.csproj", "{9227BEC1-5872-4EAB-8551-B1F5DCD18BFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,9 +39,16 @@ Global
 		{5550D872-86A2-4D4E-B809-DF63C6A85641}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5550D872-86A2-4D4E-B809-DF63C6A85641}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5550D872-86A2-4D4E-B809-DF63C6A85641}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{9227BEC1-5872-4EAB-8551-B1F5DCD18BFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9227BEC1-5872-4EAB-8551-B1F5DCD18BFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9227BEC1-5872-4EAB-8551-B1F5DCD18BFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9227BEC1-5872-4EAB-8551-B1F5DCD18BFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9227BEC1-5872-4EAB-8551-B1F5DCD18BFB} = {7F749425-20C3-4AA1-9848-FF0B90D880AB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DE33A1DB-A35E-4359-9860-83C1C0A3D883}

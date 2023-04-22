@@ -24,7 +24,7 @@ public class GetInvoicesQueryHandler : IRequestHandler<GetInvoicesQuery, Invoice
         {
             Invoices = _mapper.Map<IList<InvoiceVm>>(invoices),
             TotalAmountOfUnpaidInvoices = CalculateTotalAmountOfUnpaidInvoices(invoices),
-            AverageTimeOfPayment = CalculateAverageTimeToPay(invoices)
+            AverageTimeOfPaymentInHours = CalculateAverageTimeToPay(invoices)
         };
 
         return result;
@@ -37,26 +37,26 @@ public class GetInvoicesQueryHandler : IRequestHandler<GetInvoicesQuery, Invoice
         return totalAmountOfUnpaidInvoices;
     }
 
-    private TimeSpan CalculateAverageTimeToPay(IEnumerable<Domain.Entities.Invoice> invoices)
+    private double CalculateAverageTimeToPay(IEnumerable<Domain.Entities.Invoice> invoices)
     {
         var invoiceList = invoices.ToList();
         if (!invoiceList.Any())
-            return TimeSpan.Zero;
+            return 0;
         
         var count = 0;
-        var totalTimeToPay = TimeSpan.Zero;
+        double totalTimeToPay = 0;
 
         foreach (var invoice in invoiceList)
         {
-            var timeToPay = invoice.TimeToPay;
+            var timeToPay = invoice.TimeToPayInHours;
             if (!timeToPay.HasValue) continue;
             totalTimeToPay += timeToPay.Value;
             count++;
         }
 
-        if (count <= 0) return TimeSpan.Zero;
+        if (count <= 0) return 0;
 
-        var averageTimeToPay = TimeSpan.FromHours(Math.Round(totalTimeToPay.TotalSeconds / count));
+        var averageTimeToPay = Math.Round(totalTimeToPay / count);
         return averageTimeToPay;
     }
 }
