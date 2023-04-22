@@ -10,7 +10,7 @@ public class InvoiceRepository : Repository<Invoice>, IInvoiceRepository
     {
     }
 
-    public async Task<IList<Invoice>> GetAllWithListItemsByDueDate(bool? isPaid)
+    public async Task<IList<Invoice>> GetAllWithListItemsByDueDate(bool? isPaid = null)
     {
         var query = DbSet.AsQueryable();
 

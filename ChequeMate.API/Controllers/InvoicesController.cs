@@ -1,21 +1,26 @@
-﻿using ChequeMate.Persistence.Contracts;
+﻿using ChequeMate.API.Features.Invoice.Queries.GetInvoices;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChequeMate.API.Controllers;
 
 public class InvoicesController : BaseApiController
 {
-    private readonly IInvoiceUnitOfWork _invoiceUnitOfWork;
+    private readonly IMediator _mediator;
 
-    public InvoicesController(IInvoiceUnitOfWork invoiceUnitOfWork)
+    public InvoicesController(IMediator mediator)
     {
-        _invoiceUnitOfWork = invoiceUnitOfWork;
+        _mediator = mediator;
     }
 
     [HttpGet]
-    public async Task<IActionResult> Get()
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesDefaultResponseType]
+    public async Task<IActionResult> Get(bool? isPaid)
     {
-        var invoices = await _invoiceUnitOfWork.InvoiceRepository.GetAllWithListItemsByDueDate(null);
+        var getInvoiceQuery = new GetInvoicesQuery(isPaid);
+
+        var invoices = await _mediator.Send(getInvoiceQuery);
 
         return Ok(invoices);
     }
