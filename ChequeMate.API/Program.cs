@@ -1,4 +1,6 @@
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using ChequeMate.API.Extensions;
 using ChequeMate.API.Features.Invoice.Commands.CreateInvoice;
 using ChequeMate.API.Middleware;
 using ChequeMate.Domain.Contracts;
@@ -19,19 +21,7 @@ builder.Services.AddCors(options =>
         o => { o.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
 });
 
-builder.Services.AddDbContext<InvoiceContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ChequeMateConnection")));
-
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
-builder.Services.AddScoped<IInvoiceUnitOfWork, InvoiceUnitOfWork>();
-builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
-builder.Services.AddValidatorsFromAssemblyContaining<CreateInvoiceCommandValidator>();
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddApplicationServices(builder.Configuration);
 
 var app = builder.Build();
 
