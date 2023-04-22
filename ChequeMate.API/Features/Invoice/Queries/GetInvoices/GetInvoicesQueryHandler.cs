@@ -18,17 +18,23 @@ public class GetInvoicesQueryHandler : IRequestHandler<GetInvoicesQuery, Invoice
     public async Task<InvoiceQueryResultVm> Handle(GetInvoicesQuery request, CancellationToken cancellationToken)
     {
         var invoices = await _invoiceUnitOfWork.InvoiceRepository
-            .GetAllWithListItemsByDueDate(null);
+            .GetAllWithListItemsByDueDate(request.IsPaid);
 
         var result = new InvoiceQueryResultVm
         {
             Invoices = _mapper.Map<IList<InvoiceVm>>(invoices),
-            TotalAmountOfUnpaidInvoices = invoices.Where(x => x.IsPaid != true)
-                .Sum(x => x.TotalAmount),
+            TotalAmountOfUnpaidInvoices = CalculateTotalAmountOfUnpaidInvoices(invoices),
             AverageTimeOfPayment = CalculateAverageTimeToPay(invoices)
         };
 
         return result;
+    }
+
+    private decimal CalculateTotalAmountOfUnpaidInvoices(IEnumerable<Domain.Entities.Invoice> invoices)
+    {
+        var totalAmountOfUnpaidInvoices = invoices.Where(x => x.IsPaid != true)
+            .Sum(x => x.TotalAmount);
+        return totalAmountOfUnpaidInvoices;
     }
 
     private TimeSpan CalculateAverageTimeToPay(IEnumerable<Domain.Entities.Invoice> invoices)
