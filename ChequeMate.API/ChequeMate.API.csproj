@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ChequeMate.Domain\ChequeMate.Domain.csproj" />
     <ProjectReference Include="..\ChequeMate.Persistence\ChequeMate.Persistence.csproj" />
   </ItemGroup>
