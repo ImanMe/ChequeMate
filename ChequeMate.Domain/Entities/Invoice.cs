@@ -9,4 +9,10 @@ public class Invoice : BaseEntity
     public ICollection<ListItem> ListItems { get; set; } = new List<ListItem>();
     public decimal TotalAmount => ListItems.Sum(x => x.TotalPrice);
     public TimeSpan? TimeToPay => IsPaid && PaymentDate.HasValue ? PaymentDate.Value - DueDate : null;
+
+    public void SetAsPaid()
+    {
+        IsPaid = true;
+        PaymentDate = DateTime.Now;
+    }
 }

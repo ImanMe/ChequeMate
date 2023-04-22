@@ -21,4 +21,11 @@ public class InvoiceRepository : Repository<Invoice>, IInvoiceRepository
             .Include(x => x.ListItems)
             .ToListAsync();
     }
+
+    public async Task<Invoice> GetByIdWithListItems(int id)
+    {
+        var invoice = await DbSet.Include(x => x.ListItems)
+            .SingleOrDefaultAsync(x => x.Id == id);
+        return invoice;
+    }
 }

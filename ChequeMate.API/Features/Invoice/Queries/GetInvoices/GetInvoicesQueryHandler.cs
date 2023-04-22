@@ -5,12 +5,12 @@ using MediatR;
 
 namespace ChequeMate.API.Features.Invoice.Queries.GetInvoices;
 
-public class GetInvoiceQueryHandler : IRequestHandler<GetInvoicesQuery, InvoiceQueryResultVm>
+public class GetInvoicesQueryHandler : IRequestHandler<GetInvoicesQuery, InvoiceQueryResultVm>
 {
     private readonly IMapper _mapper;
     private readonly IInvoiceUnitOfWork _invoiceUnitOfWork;
 
-    public GetInvoiceQueryHandler(IMapper mapper, IInvoiceUnitOfWork invoiceUnitOfWork)
+    public GetInvoicesQueryHandler(IMapper mapper, IInvoiceUnitOfWork invoiceUnitOfWork)
     {
         _mapper = mapper;
         _invoiceUnitOfWork = invoiceUnitOfWork;
@@ -23,7 +23,8 @@ public class GetInvoiceQueryHandler : IRequestHandler<GetInvoicesQuery, InvoiceQ
         var result = new InvoiceQueryResultVm
         {
             Invoices = _mapper.Map<IList<InvoiceVm>>(invoices),
-            TotalAmountOfUnpaidInvoices = invoices.Where(x => x.IsPaid != true).Sum(x => x.TotalAmount),
+            TotalAmountOfUnpaidInvoices = invoices.Where(x => x.IsPaid != true)
+                .Sum(x => x.TotalAmount),
             AverageTimeOfPayment = CalculateAverageTimeToPay(invoices)
         };
 
@@ -38,6 +39,7 @@ public class GetInvoiceQueryHandler : IRequestHandler<GetInvoicesQuery, InvoiceQ
         
         var count = 0;
         var totalTimeToPay = TimeSpan.Zero;
+
         foreach (var invoice in invoiceList)
         {
             var timeToPay = invoice.TimeToPay;
@@ -45,8 +47,10 @@ public class GetInvoiceQueryHandler : IRequestHandler<GetInvoicesQuery, InvoiceQ
             totalTimeToPay += timeToPay.Value;
             count++;
         }
-        var averageTimeToPay = TimeSpan.FromHours(Math.Round(totalTimeToPay.TotalSeconds / count));
 
+        if (count <= 0) return TimeSpan.Zero;
+
+        var averageTimeToPay = TimeSpan.FromHours(Math.Round(totalTimeToPay.TotalSeconds / count));
         return averageTimeToPay;
     }
 }
