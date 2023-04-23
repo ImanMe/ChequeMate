@@ -24,6 +24,8 @@ import { InvoiceDetailsComponent } from './invoice/invoice-details/invoice-detai
 import { RouterModule } from '@angular/router';
 import { InvoiceCreateComponent } from './invoice/invoice-create/invoice-create.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     InvoiceComponent,
     InvoiceListComponent,
     InvoiceDetailsComponent,
-    InvoiceCreateComponent
+    InvoiceCreateComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatTableModule,
     MatIconModule,
     MatButtonModule,
+    MatNativeDateModule, 
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([

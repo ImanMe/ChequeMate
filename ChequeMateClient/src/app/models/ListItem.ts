@@ -20,3 +20,9 @@ export interface IListItem {
     quantity:    number;
     totalPrice:  number;
 }
+
+export interface ICreateInvoice{
+    customerName: string;
+    dueDate:      string;
+    listItems:IListItem[];
+}

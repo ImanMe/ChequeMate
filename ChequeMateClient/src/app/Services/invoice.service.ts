@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IInvoice, IInvoiceListResult } from '../models/ListItem';
+import { ICreateInvoice, IInvoice, IInvoiceListResult } from '../models/ListItem';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,8 +10,8 @@ export class InvoiceService {
 
   constructor(private http: HttpClient) { }
 
-  getInvoices = (isPaid: boolean = false): Observable<IInvoiceListResult> => {
-    const url = isPaid ? `/api/invoices?isPaid=${isPaid}` : '/api/invoices';
+  getInvoices = (isPaid: boolean = true): Observable<IInvoiceListResult> => {
+    const url = !isPaid ? `/api/invoices?isPaid=${isPaid}` : '/api/invoices';
     return this.http.get<IInvoiceListResult>(url);
   }
 
@@ -21,4 +21,6 @@ export class InvoiceService {
     const url = `${'/api/invoices'}/${invoiceId}/mark-as-paid`;
     return this.http.patch(url, null);
   }
+
+  createInvoice = (invoice: ICreateInvoice) => this.http.post('/api/invoices', invoice);
 }

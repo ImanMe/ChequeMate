@@ -15,11 +15,13 @@
         <mat-panel-description>
           <mat-radio-group aria-label="Select an option">
             <mat-radio-button (change)="filterDataByPaymentStatus($event)" [checked]="true" value="ShowAll">Show All</mat-radio-button>
-            <mat-radio-button (change)="filterDataByPaymentStatus($event)" value="ShowPaid">Show Paid</mat-radio-button>
+            <mat-radio-button (change)="filterDataByPaymentStatus($event)" value="ShowUnPaid">Show Unpaid</mat-radio-button>
           </mat-radio-group>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <app-invoice-list [invoices]="invoices"></app-invoice-list>
+      <app-invoice-list (paymentStatusChanged)="loadInvoices()" [invoices]="invoices"></app-invoice-list>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
+<app-spinner *ngIf="!invoiceListResult">
+</app-spinner>

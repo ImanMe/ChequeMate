@@ -13,6 +13,7 @@ export class InvoiceComponent implements OnInit {
   panelOpenState = true;
   invoiceListResult: IInvoiceListResult;
   invoices: IInvoice[];
+  isPaid = true;
 
   constructor(private invoiceService: InvoiceService, private router: Router) {
   }
@@ -21,8 +22,8 @@ export class InvoiceComponent implements OnInit {
     this.loadInvoices();
   }
 
-  loadInvoices = (isPaid: boolean = false) => {
-    this.invoiceService.getInvoices(isPaid).subscribe({
+  loadInvoices = () => {
+    this.invoiceService.getInvoices(this.isPaid).subscribe({
       next: (result) => {
         this.invoiceListResult = result,
           this.invoices = this.invoiceListResult.invoices
@@ -34,7 +35,14 @@ export class InvoiceComponent implements OnInit {
   }
 
   filterDataByPaymentStatus = (event: any) => {
-    this.loadInvoices(event.value === 'ShowPaid');
+    if(event.value === 'ShowUnPaid'){
+      this.isPaid = false;
+      this.loadInvoices();
+    }
+    else{
+      this.isPaid = true;
+      this.loadInvoices();
+    }
   }
 
   createNew = () => {

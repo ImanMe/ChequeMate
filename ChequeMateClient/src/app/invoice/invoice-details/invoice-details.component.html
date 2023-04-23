@@ -31,7 +31,7 @@
             </div>
             <div>
                 <span class="itemtitle">Status:</span>
-                <span class="itemtext">{{invoice.isPaid}}</span>
+                <span class="itemtext">{{invoice.isPaid ? 'Paid' : 'Not paid'}}</span>
             </div>
             <div>
                 <span class="itemtitle">Total Amount:</span>
@@ -54,3 +54,5 @@
         </mat-expansion-panel>
     </mat-accordion>
 </div>
+<app-spinner *ngIf="!invoice">
+</app-spinner>
