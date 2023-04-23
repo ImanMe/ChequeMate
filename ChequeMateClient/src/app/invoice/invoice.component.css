@@ -1,0 +1,22 @@
+.mat-mdc-form-field+.mat-mdc-form-field {
+    margin-left: 8px;
+}
+
+.blue-text {
+    color: #3f51b5;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+.page-title {
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+.create-button {
+    margin-left: auto;
+    margin-right: 20px;
+}

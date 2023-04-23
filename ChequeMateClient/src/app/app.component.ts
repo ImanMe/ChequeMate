@@ -1,5 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,20 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public forecasts?: WeatherForecast[];
-
-  constructor(http: HttpClient) {
-    http.get<any>('/api/invoices').subscribe(result => {
-      console.log(result)
-    }, error => console.error(error));
-  }
-
   title = 'ChequeMateClient';
-}
-
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
+  
+  constructor() {    
+  }
 }

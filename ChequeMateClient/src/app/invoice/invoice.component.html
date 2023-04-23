@@ -1,0 +1,25 @@
+<div class="header">
+  <h3 class="page-title">ChequeMate</h3>
+  <button class="create-button" mat-raised-button color="primary" (click)="createNew()">Create New</button>
+</div>
+<div *ngIf="invoiceListResult">
+  <mat-accordion>
+    <mat-expansion-panel [disabled]="true" [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-description>
+          <span class="blue-text">Total unpaid amount: {{invoiceListResult.totalAmountOfUnpaidInvoices | currency:'CAD'}}</span>
+        </mat-panel-description>
+        <mat-panel-description>
+          <span class="blue-text">Average payment time (hours): {{invoiceListResult.averageTimeOfPaymentInHours}}</span>
+        </mat-panel-description>
+        <mat-panel-description>
+          <mat-radio-group aria-label="Select an option">
+            <mat-radio-button (change)="filterDataByPaymentStatus($event)" [checked]="true" value="ShowAll">Show All</mat-radio-button>
+            <mat-radio-button (change)="filterDataByPaymentStatus($event)" value="ShowPaid">Show Paid</mat-radio-button>
+          </mat-radio-group>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-invoice-list [invoices]="invoices"></app-invoice-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

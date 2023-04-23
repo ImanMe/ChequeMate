@@ -9,5 +9,5 @@ public class InvoiceVm
     public string PaymentDate { get; set; }
     public bool IsPaid { get; set; }
     public decimal TotalAmount { get; set; }
-    public IList<ListItemVm> ListItemDtos { get; set; } = new List<ListItemVm>();
+    public IList<ListItemVm> ListItems { get; set; } = new List<ListItemVm>();
 }

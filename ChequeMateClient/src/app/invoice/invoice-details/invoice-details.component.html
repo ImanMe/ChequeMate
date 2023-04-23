@@ -1,0 +1,56 @@
+<div *ngIf="invoice">
+    <mat-accordion>
+        <mat-expansion-panel [disabled]="true" [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    INVOICE
+                </mat-panel-title>
+                <mat-panel-description>
+                    <button mat-stroked-button (click)="onBackClick()">Back</button>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div>
+                <span class="itemtitle">Invoice#</span>
+                <span class="itemtext">{{invoice.id}}</span>
+            </div>
+            <div>
+                <span class="itemtitle">Date:</span>
+                <span class="itemtext">{{invoice.invoiceDate | date:'medium'}}</span>
+            </div>
+            <div>
+                <span class="itemtitle">Customer:</span>
+                <span class="itemtext">{{invoice.customerName}}</span>
+            </div>
+            <div>
+                <span class="itemtitle">Due Date:</span>
+                <span class="itemtext">{{invoice.dueDate | date}}</span>
+            </div>
+            <div>
+                <span class="itemtitle">Payment Date:</span>
+                <span class="itemtext">{{invoice.paymentDate | date:'medium'}}</span>
+            </div>
+            <div>
+                <span class="itemtitle">Status:</span>
+                <span class="itemtext">{{invoice.isPaid}}</span>
+            </div>
+            <div>
+                <span class="itemtitle">Total Amount:</span>
+                <span class="itemtext">{{invoice.totalAmount}}</span>
+            </div>
+            <div class="itemlist-section">
+                <table>
+                    <tr>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                    </tr>
+                    <tr *ngFor="let item of listItems">
+                        <td>{{item.description}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.totalPrice | currency:'CAD'}}</td>
+                    </tr>
+                </table>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

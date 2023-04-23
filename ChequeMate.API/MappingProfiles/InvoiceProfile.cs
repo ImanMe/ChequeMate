@@ -18,7 +18,7 @@ public class InvoiceProfile : Profile
                 o.MapFrom(src => src.DueDate))
             .ForMember(dest => dest.PaymentDate, o => 
                 o.MapFrom(src => src.PaymentDate))
-            .ForMember(dest => dest.ListItemDtos, o =>
+            .ForMember(dest => dest.ListItems, o =>
                 o.MapFrom(src => src.ListItems));
 
         CreateMap<ListItemCreateDto, ListItem>();
