@@ -5,6 +5,9 @@
                 Create an Invoice
             </mat-panel-description>
         </mat-expansion-panel-header>
+        <div style="float: right;">
+            Total Invoice Amount: {{getTotalInvoiceAmount()}}
+        </div>
         <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
             <div class="invoice-wrapper">
                 <div>

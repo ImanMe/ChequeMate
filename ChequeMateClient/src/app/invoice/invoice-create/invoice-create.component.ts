@@ -15,7 +15,7 @@ export class InvoiceCreateComponent implements OnInit {
   commonErrorMessage: string = '';
   minDate: Date;
   totalInvoiceAMount = 0;
-  constructor(private invoiceService:InvoiceService, private router: Router, private _snackBar: MatSnackBar){
+  constructor(private invoiceService: InvoiceService, private router: Router, private _snackBar: MatSnackBar) {
     this.minDate = new Date();
   }
   ngOnInit() {
@@ -34,7 +34,7 @@ export class InvoiceCreateComponent implements OnInit {
     this.listItems.push(this.createItem());
   }
 
-  removeItem= (index: number): void => {
+  removeItem = (index: number): void => {
     this.listItems.removeAt(index);
   }
 
@@ -46,26 +46,36 @@ export class InvoiceCreateComponent implements OnInit {
     });
   }
 
-  onSubmit= (): void => {
+  onSubmit = (): void => {
     const formData: ICreateInvoice = this.invoiceForm.value;
-    if(this.invoiceForm.invalid){
+    if (this.invoiceForm.invalid) {
       this.commonErrorMessage = 'Look for errors in the form';
     }
-    else if(formData.listItems.length === 0){
+    else if (formData.listItems.length === 0) {
       this.commonErrorMessage = 'Add one list item at the least';
     }
-    else{
+    else {
       this.invoiceService.createInvoice(formData).subscribe({
         next: () => {
           this._snackBar.open("Invoice is created", "Success", { duration: 3000 }),
-          this.router.navigate(['/'])
+            this.router.navigate(['/'])
         },
         error: (error) => console.log(error)
       });
     }
   }
 
-  onCancel():void {
+  getTotalInvoiceAmount(): number {
+    const listItems = this.invoiceForm.get('listItems') as FormArray;
+    let sum = 0;
+    listItems.controls.forEach((item) => {
+      const totalPrice = item.get('totalPrice')?.value;
+      sum += totalPrice ? totalPrice : 0;
+    });
+    return sum;
+  }
+
+  onCancel(): void {
     this.router.navigate(['/']);
   }
 }
