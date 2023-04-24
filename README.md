@@ -9,3 +9,9 @@ Right-click the solution and select Set Startup Project. Change the startup proj
 
 
 >If angular application doesn't show the data, most likely the frontend started before the backend. Once you see the backend swagger page up and running, just refresh the Angular App in the browser
+
+Future enhancments:
+1. Increase unit test coverage.
+2. Application secret (connection string) to be stored in Azure kevault.
+3. Exceptions to be logged to a log management system. eg. splunk, new relic.
+4. Add authentication/authorization to the application.
