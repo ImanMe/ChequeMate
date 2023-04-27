@@ -22,7 +22,7 @@ public class CreateInvoiceCommandValidator : AbstractValidator<CreateInvoiceComm
     {
         if (DateTime.TryParse(dueDate, out var parsedDueDate))
         {
-            return parsedDueDate.Day >= DateTime.Now.Day;
+            return parsedDueDate >= DateTime.Now;
         }
 
         return false;
